@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  postgres-db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    volumes:
+      - /var/lib/pgdata:/var/lib/postgresql/data
+    env_file: .env
+    ports:
+      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}
+    networks:
+      - api-network
+networks:
+  api-network:
+    driver: bridge
