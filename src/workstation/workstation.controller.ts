@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { WorkstationService } from './workstation.service';
 import { CreateWorkstationDto } from './dto/create-workstation.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -8,11 +16,11 @@ import { validateBody } from 'src/utils/validate-body';
 @Controller('workstations')
 export class WorkstationController {
   constructor(private readonly workstationService: WorkstationService) {}
-  
+
   @ApiOperation({ summary: 'Cria uma nova estação de trabalho' })
   @Post()
-   async create(@Body() createWorkstationDto: CreateWorkstationDto) {
-    await validateBody(CreateWorkstationDto, Body)
+  async create(@Body() createWorkstationDto: CreateWorkstationDto) {
+    await validateBody(CreateWorkstationDto, Body);
     return this.workstationService.create(createWorkstationDto);
   }
 
@@ -30,8 +38,11 @@ export class WorkstationController {
 
   @ApiOperation({ summary: 'Edita uma estação de trabalho por id' })
   @Put(':id')
- async update(@Param('id') id: string, @Body() updateWorkstationDto: CreateWorkstationDto) {
-  await validateBody(CreateWorkstationDto, Body)
+  async update(
+    @Param('id') id: string,
+    @Body() updateWorkstationDto: CreateWorkstationDto,
+  ) {
+    await validateBody(CreateWorkstationDto, Body);
     return this.workstationService.update(id, updateWorkstationDto);
   }
 

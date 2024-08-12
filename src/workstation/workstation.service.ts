@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateWorkstationDto } from './dto/create-workstation.dto';
 
@@ -7,7 +7,6 @@ export class WorkstationService {
   constructor(private prisma: PrismaService) {}
 
   async create(createWorkstationDto: CreateWorkstationDto) {
-    await this.findLineById(createWorkstationDto.productionLineId);
     return this.prisma.workstation.create({
       data: createWorkstationDto,
     });
@@ -33,7 +32,6 @@ export class WorkstationService {
   }
 
   async update(id: string, updateWorkstationDto: CreateWorkstationDto) {
-    await this.findLineById(updateWorkstationDto.productionLineId)
     return this.prisma.workstation.update({
       where: { id },
       data: updateWorkstationDto,
@@ -42,20 +40,5 @@ export class WorkstationService {
 
   async remove(id: string) {
     return this.prisma.workstation.delete({ where: { id } });
-  }
-
-  async findLineById(productionLineId: string) {
-    const existingProductionLine = await this.prisma.workstation.findFirst({
-      where: {
-        productionLineId,
-      },
-    });
-
-    if (existingProductionLine) {
-      throw new BadRequestException(
-        `Esta linha de produção já está vinculada a outro posto.`
-      );
-    }
-    return null; 
   }
 }

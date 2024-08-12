@@ -1,8 +1,26 @@
 version: "3.9"
 
 services:
+  core-api:
+    container_name: core-api
+    build:
+      context: .
+      args:
+        PORT: ${BACKEND_PORT}
+    restart: always
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+    env_file: .env
+    ports:
+      - ${BACKEND_EXTERNAL_PORT}:${BACKEND_PORT}
+    depends_on:
+      - postgres-db
+    networks:
+      - api-network
+
   postgres-db:
-    container_name: postgres
+    container_name: postgres-db
     image: postgres
     restart: always
     volumes:

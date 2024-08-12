@@ -11,7 +11,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), 
+    ConfigModule.forRoot(),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

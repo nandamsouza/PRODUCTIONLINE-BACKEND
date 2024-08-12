@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ProductionLineService } from './production-line.service';
 import { CreateProductionLineDto } from './dto/createProductionLine.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -11,10 +20,9 @@ export class ProductionLineController {
   constructor(private readonly productionLineService: ProductionLineService) {}
 
   @ApiOperation({ summary: 'Cria uma nova de linha de produção' })
-  
   @Post()
   async create(@Body() createProductionLineDto: CreateProductionLineDto) {
-   await validateBody(CreateProductionLineDto,Body)
+    await validateBody(CreateProductionLineDto, Body);
     return this.productionLineService.create(createProductionLineDto);
   }
 
@@ -35,8 +43,11 @@ export class ProductionLineController {
   @ApiOperation({ summary: 'Edita uma linha especifica por id' })
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateProductionLineDto: CreateProductionLineDto) {
-    await validateBody(CreateProductionLineDto, Body)
+  async update(
+    @Param('id') id: string,
+    @Body() updateProductionLineDto: CreateProductionLineDto,
+  ) {
+    await validateBody(CreateProductionLineDto, Body);
     return this.productionLineService.update(id, updateProductionLineDto);
   }
 

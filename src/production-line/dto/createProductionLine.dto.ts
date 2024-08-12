@@ -3,11 +3,10 @@ import { ProductionLineType } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductionLineDto {
-    
-    @ApiProperty({
-        description: 'name: string',
-        example: 'string',
-      })
+  @ApiProperty({
+    description: 'name: string',
+    example: 'string',
+  })
   @IsString()
   @IsNotEmpty()
   name: string;

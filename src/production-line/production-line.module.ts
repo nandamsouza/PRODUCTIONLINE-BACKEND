@@ -4,8 +4,8 @@ import { ProductionLineController } from './production-line.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
-  imports:[PrismaModule],
+  imports: [PrismaModule],
   providers: [ProductionLineService],
-  controllers: [ProductionLineController]
+  controllers: [ProductionLineController],
 })
 export class ProductionLineModule {}
