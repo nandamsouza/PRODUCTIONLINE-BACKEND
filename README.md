@@ -34,7 +34,7 @@ docker-compose up --build
 ```
 * Execute as migrações do Prisma:
 ```bash
-docker-compose exec app npx prisma migrate dev
+docker-compose exec core-api npx prisma migrate dev
 ```
 ##### Acesse a aplicação:
 
